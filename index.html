@@ -1,0 +1,1172 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="EQUIPE 5:30 - A Tropa de Minas. Referência em CCs premium, entrega automática e suporte 24/7.">
+    <title>EQUIPE 5:30 - TROPA DE MINAS | Início</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Poppins:wght@500;600;700;800;900&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           1. CORE STYLES & VARIAVEIS
+           ========================================= */
+        :root {
+            --bg-dark: #050505;
+            --bg-panel: #0a0a0a;
+            --bg-card: rgba(20, 20, 20, 0.7);
+            --bg-glass: rgba(255, 255, 255, 0.02);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(212, 175, 55, 0.3);
+            
+            --primary: #ffffff;
+            --secondary: #a0a0a0;
+            --gold: #d4af37;
+            --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 40%, #b38728 60%, #fbf5b7 100%);
+            --silver-gradient: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            --insta-grad: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --success: #10b981;
+            --font-main: 'Inter', sans-serif;
+            --font-display: 'Poppins', sans-serif;
+            --font-mono: 'Courier Prime', monospace;
+            
+            --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+            --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--primary);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.03), transparent 25%);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(to bottom, #8a6e2f, #d4af37);
+            border-radius: 4px; 
+            border: 2px solid #000;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: -1; opacity: 0.6; pointer-events: none;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .text-gold { 
+            background: var(--gold-gradient);
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-size: 200% auto;
+            animation: shine-text 5s linear infinite;
+        }
+
+        @keyframes shine-text {
+            to { background-position: 200% center; }
+        }
+
+        .text-center { text-align: center; }
+        
+        .fade-in-up { opacity: 0; transform: translateY(40px); transition: all 1s var(--ease-out); }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); transform: scale(1); }
+            50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.6); transform: scale(1.1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 80px; padding: 0 5%;
+            display: flex; align-items: center; justify-content: space-between; z-index: 1000;
+            background: rgba(5, 5, 5, 0.7); 
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .logo-img {
+            width: 45px;
+            height: 45px; border-radius: 50%; object-fit: cover;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+        .brand-text h1 {
+            font-family: var(--font-display);
+            font-size: 1.1rem; font-weight: 900; letter-spacing: 0.05em;
+            text-transform: uppercase; color: #fff;
+        }
+        .brand-text span { display: block; font-size: 0.65rem; color: var(--gold); letter-spacing: 0.2em;
+            font-weight: 600; text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        }
+
+        .menu-toggle { width: 30px; height: 30px; cursor: pointer; position: relative; z-index: 1002; }
+        .menu-toggle span {
+            display: block;
+            width: 100%; height: 2px; background: #fff; position: absolute; left: 0;
+            transition: all 0.4s var(--bounce); border-radius: 2px;
+        }
+        .menu-toggle span:nth-child(1) { top: 6px; }
+        .menu-toggle span:nth-child(2) { top: 14px; }
+        .menu-toggle span:nth-child(3) { top: 22px; }
+        
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg); top: 14px; background: var(--gold); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg); top: 14px; background: var(--gold); }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0; right: 0; width: 100%; height: 100vh;
+            background: #000; z-index: 1001;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: all 0.5s var(--ease-out); transform: translateY(-20px);
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+        }
+        .nav-overlay.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .nav-links li { list-style: none; margin: 25px 0; text-align: center; }
+        .nav-links a {
+            font-family: var(--font-display);
+            font-size: 2.5rem; color: #fff; text-decoration: none;
+            font-weight: 800; text-transform: uppercase; letter-spacing: -1px; transition: all 0.3s;
+            position: relative; display: inline-block;
+        }
+        .nav-links a:hover { color: transparent; -webkit-text-stroke: 1px var(--gold); transform: scale(1.05); }
+
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding-top: 80px; position: relative;
+            background: radial-gradient(circle at center, rgba(20,20,20,0.5) 0%, transparent 70%);
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-light);
+            padding: 8px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 600;
+            margin-bottom: 25px; display: inline-flex; align-items: center;
+            gap: 8px;
+            color: var(--secondary); backdrop-filter: blur(5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-badge .dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%;
+            box-shadow: 0 0 10px var(--success); }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: 4rem; line-height: 1.1; font-weight: 900;
+            margin-bottom: 20px; text-transform: uppercase;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--secondary); max-width: 600px; margin-bottom: 40px;
+        }
+
+        .cta-btn {
+            position: relative;
+            overflow: hidden;
+            background: #fff; color: #000;
+            padding: 22px 50px; border-radius: 50px; font-family: var(--font-display);
+            font-weight: 800; font-size: 1.1rem; text-decoration: none;
+            box-shadow: 0 0 30px rgba(255,255,255,0.1); transition: all 0.3s;
+            display: inline-flex; align-items: center; gap: 10px; text-transform: uppercase;
+            z-index: 1;
+            border: 2px solid transparent;
+        }
+        
+        .cta-btn::after {
+            content: '';
+            position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transition: 0.5s; z-index: -1;
+        }
+        
+        .cta-btn:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(255,255,255,0.2); 
+            background: var(--gold-gradient);
+            border-color: #fff;
+        }
+        .cta-btn:hover::after { left: 100%; transition: 0.5s ease-in-out; }
+
+        /* =========================================
+           ESTILO MELHORADO: BARRA DE SEGURANÇA PIX
+           ========================================= */
+        .pix-security-banner {
+            margin-top: 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 28px;
+            background: rgba(212, 175, 55, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pix-security-banner:hover {
+            background: rgba(212, 175, 55, 0.08);
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .pix-security-banner svg {
+            color: var(--gold);
+            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.5));
+            animation: lock-pulse 2s infinite;
+        }
+
+        .pix-security-banner span {
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #efefef;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .pix-security-banner .highlight {
+            color: var(--gold);
+            font-weight: 800;
+            margin-left: 4px;
+        }
+
+        @keyframes lock-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-stats {
+            margin-top: 60px;
+            display: flex; gap: 40px; flex-wrap: wrap; justify-content: center;
+            border-top: 1px solid var(--border-light); padding-top: 40px; width: 100%; max-width: 800px;
+        }
+        .stat-box h3 { font-family: var(--font-display); font-size: 2.5rem; font-weight: 900; line-height: 1; color: #fff; }
+        .stat-box p { font-size: 0.85rem; color: var(--gold); text-transform: uppercase; margin-top: 5px; letter-spacing: 1px; font-weight: 600; }
+
+        .section-padding { padding: 100px 0; border-bottom: 1px solid var(--border-light); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-title { font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; }
+        .section-subtitle { color: var(--secondary); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
+        }
+
+        .benefit-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid var(--border-light);
+            padding: 40px 30px; border-radius: 20px; transition: all 0.4s;
+            backdrop-filter: blur(10px);
+            position: relative; overflow: hidden;
+        }
+        
+        .benefit-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        }
+
+        .benefit-card:hover { 
+            transform: translateY(-10px);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+        }
+        
+        .icon-box {
+            width: 60px;
+            height: 60px; background: rgba(212, 175, 55, 0.1); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 25px;
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .benefit-card:hover .icon-box { background: var(--gold); color: #000; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+
+        .benefit-card h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; margin-bottom: 15px; }
+        .benefit-card p { color: var(--secondary); font-size: 0.95rem; line-height: 1.6; }
+
+        .steps-container { display: flex; flex-direction: column; gap: 20px; max-width: 800px; margin: 0 auto; }
+        
+        .step-item {
+            display: flex;
+            align-items: flex-start; gap: 20px; padding: 30px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+            border-left: 3px solid var(--border-light); transition: all 0.3s;
+            position: relative;
+        }
+        .step-item:hover { 
+            border-left-color: var(--gold);
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
+            padding-left: 40px;
+        }
+        
+        .step-number {
+            font-family: var(--font-display);
+            font-size: 3rem; font-weight: 900;
+            color: rgba(255,255,255,0.05); line-height: 0.8; transition: color 0.3s;
+        }
+        .step-item:hover .step-number { color: var(--gold); opacity: 0.4; }
+        
+        .step-content h4 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+        .step-content p { color: var(--secondary); font-size: 0.95rem; }
+
+        .insta-section {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #080808 100%);
+            position: relative; overflow: hidden;
+            padding: 80px 0;
+        }
+        
+        .insta-glow-bg {
+            position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; max-width: 600px; height: 400px;
+            background: radial-gradient(circle, rgba(220, 39, 67, 0.15), transparent 70%);
+            filter: blur(80px); z-index: 0; pointer-events: none;
+        }
+
+        .insta-card {
+            background: rgba(15, 15, 15, 0.85);
+            border-radius: 24px; 
+            padding: 0; 
+            max-width: 500px; 
+            margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            position: relative; 
+            z-index: 1;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6); 
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            overflow: hidden;
+        }
+
+        .insta-top-bar {
+            display: flex;
+            justify-content: center; align-items: center;
+            padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem; font-weight: 600; color: #fff; letter-spacing: 0.5px;
+        }
+
+        .insta-profile-header {
+            padding: 30px 25px 20px;
+            display: flex; align-items: center; gap: 20px;
+        }
+
+        .insta-avatar-wrapper {
+            position: relative;
+            width: 85px; height: 85px; flex-shrink: 0;
+        }
+        .insta-avatar-ring {
+            position: absolute;
+            inset: 0; border-radius: 50%; padding: 3px;
+            background: var(--insta-grad);
+        }
+        .insta-avatar-img {
+            width: 100%;
+            height: 100%; border-radius: 50%; object-fit: cover;
+            border: 3px solid #0f0f0f; background: #000; position: relative; z-index: 2;
+        }
+
+        .insta-info h3 {
+            font-size: 1.4rem; font-weight: 700; color: #fff;
+            display: flex; align-items: center; gap: 6px; margin-bottom: 4px;
+        }
+        
+        .verified-badge { width: 18px; height: 18px; color: #3897f0; fill: currentColor; }
+        .insta-category { font-size: 0.85rem; color: #888; display: block; margin-bottom: 10px; }
+        .insta-stats-row { display: flex; gap: 20px; font-size: 0.95rem; }
+        .insta-stats-row span { color: #fff; font-weight: 600; }
+        .insta-stats-row small { font-weight: 400; color: #aaa; margin-left: 4px; }
+        .insta-bio { padding: 0 25px 20px; font-size: 0.95rem; color: #ddd; line-height: 1.5; }
+
+        .stories-wrapper { display: flex; gap: 18px; padding: 0 25px 30px; overflow-x: auto; }
+        .story-item { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 64px; }
+        .story-ring-circle {
+            width: 60px; height: 60px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;
+        }
+        .story-item p { font-size: 0.75rem; color: #fff; white-space: nowrap; }
+
+        .insta-action-area {
+            padding: 20px 25px 35px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: linear-gradient(180deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.03) 100%);
+        }
+
+        .btn-insta-premium {
+            background: var(--insta-grad); color: #fff; border: none;
+            width: 100%; padding: 16px; border-radius: 12px;
+            font-weight: 700; font-size: 1rem; letter-spacing: 0.5px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(220, 39, 67, 0.4);
+            position: relative; overflow: hidden;
+        }
+        
+        .btn-insta-premium::before {
+            content: '';
+            position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-insta-premium:hover { 
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 15px 35px rgba(220, 39, 67, 0.6);
+        }
+        .btn-insta-premium:hover::before { left: 100%; }
+
+        @media (max-width: 600px) {
+            .insta-card { border-radius: 0; border-left: none; border-right: none; max-width: 100%; }
+        }
+
+        .policy-container {
+            background: rgba(212, 175, 55, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.05);
+        }
+        .policy-container::before {
+            content: "IMPORTANTE";
+            position: absolute; top: 0; right: 0;
+            background: var(--gold-gradient); color: #000;
+            font-size: 0.7rem; font-weight: 900; padding: 5px 15px;
+            border-bottom-left-radius: 10px;
+        }
+        .policy-grid-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+        }
+        .policy-item { display: flex; gap: 15px; }
+        .policy-icon {
+            min-width: 30px;
+            height: 30px; background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: var(--gold); font-size: 1.2rem;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+        }
+        .policy-text h5 { color: #fff; font-size: 1.1rem; margin-bottom: 5px; font-weight: 700; }
+        .policy-text p { color: var(--secondary); font-size: 0.9rem; line-height: 1.4; }
+        .policy-link {
+            display: inline-block;
+            margin-top: 5px; color: var(--gold); 
+            text-decoration: underline; font-weight: 600; font-size: 0.85rem;
+        }
+
+        .faq-grid { display: grid; grid-template-columns: 1fr; gap: 15px; max-width: 800px; margin: 0 auto; }
+        
+        .faq-item {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-light); border-radius: 12px;
+            overflow: hidden; transition: all 0.3s;
+        }
+        .faq-question {
+            padding: 20px;
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            font-weight: 600; font-size: 1.05rem; transition: color 0.3s;
+        }
+        .faq-question:hover { color: var(--gold); }
+        
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: var(--secondary); font-size: 0.95rem; display: none;
+            border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;
+        }
+        .faq-item.active { background: rgba(255,255,255,0.06); border-color: rgba(212, 175, 55, 0.3); }
+        .faq-item.active .faq-answer { display: block; animation: slideDown 0.3s ease; }
+        .faq-item.active .faq-question { color: var(--gold); }
+        
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .faq-icon { transition: transform 0.3s; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); stroke: var(--gold); }
+
+        footer {
+            background: linear-gradient(to bottom, #0a0a0a 0%, #000 100%);
+            padding: 100px 0 50px;
+            border-top: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::after {
+            content: '';
+            position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 80%; height: 200px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            z-index: 0; pointer-events: none;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-brand-col { display: flex; flex-direction: column; gap: 20px; }
+        
+        .footer-logo-premium {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            padding: 3px;
+            background: #000;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-brand-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .footer-brand-desc {
+            color: var(--secondary);
+            font-size: 0.95rem;
+            max-width: 300px;
+            line-height: 1.6;
+        }
+
+        .footer-col-title {
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col-title::after {
+            content: '';
+            position: absolute; bottom: -8px; left: 0;
+            width: 30px; height: 2px; background: var(--gold);
+        }
+
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover { color: var(--gold); transform: translateX(5px); }
+
+        .footer-payment-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-light);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .payment-pill {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .payment-pill span {
+            width: 8px;
+            height: 8px; border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-row-premium {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; transition: 0.4s;
+        }
+
+        .social-btn:hover {
+            background: var(--gold);
+            color: #000;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+            border-color: var(--gold);
+        }
+
+        .copyright-premium {
+            color: #555;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-stats { gap: 20px; }
+            .stat-box { min-width: 40%; }
+            .cta-btn { width: 100%; justify-content: center; }
+            .policy-container { padding: 25px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .footer-brand-col, .footer-links a { align-items: center; justify-content: center; }
+            .footer-brand-desc { max-width: 100%; }
+            .footer-col-title::after { left: 50%; transform: translateX(-50%); }
+            .footer-payment-card { align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://i.imgur.com/9BNOjy7.jpeg" alt="Logo Equipe 5:30" class="logo-img">
+            <div class="brand-text">
+                <h1>EQUIPE 5:30</h1>
+                <span>TROPA DE MINAS</span>
+            </div>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <nav class="nav-overlay" id="navOverlay">
+        <ul class="nav-links">
+            <li><a href="#" onclick="closeMenu()">Início</a></li>
+            <li><a href='/cartoes' onclick='closeMenu()'>Catálogo</a></li>
+            <li><a href="#beneficios" onclick="closeMenu()">Benefícios</a></li>
+            <li><a href="#regras" onclick="closeMenu()">Regras</a></li>
+            <li><a href="#faq" onclick="closeMenu()">Dúvidas</a></li>
+            <li><a href="https://chat.whatsapp.com/DZ9PUCDeep702QDgF7cfJu" target="_blank" onclick="closeMenu()">Contato</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="hero container">
+            <div class="hero-badge fade-in-up">
+                <span class="dot"></span> SISTEMA ONLINE • ESTOQUE RENOVADO
+            </div>
+            
+            <h1 class="hero-title fade-in-up">
+                A CC MAIS <br>
+                <span class="text-gold">BRABA DO BRASIL</span>
+            </h1>
+            
+            <p class="hero-desc fade-in-up">
+                Esqueça fornecedores amadores. Entre para a Tropa 5:30 e tenha acesso a material fresco, testado e com aprovação garantida. O único shop com entrega 100% automática.
+            </p>
+            
+            <div class="fade-in-up" style="margin-bottom: 40px; text-align: center;">
+                <a class='cta-btn' href='/cartoes'>
+                    ACESSAR CATÁLOGO VIP
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                
+                <br>
+
+                <div class="pix-security-banner">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>Compra segura e anônima via <span class="highlight">Pix</span></span>
+                </div>
+            </div>
+
+            <div class="hero-stats fade-in-up">
+                <div class="stat-box">
+                    <h3 class="count-up" data-target="98">0</h3>
+                    <p>% Taxa Live</p>
+                </div>
+                <div class="stat-box">
+                    <h3 class="count-up" data-target="1500">0</h3>
+                    <p>Clientes</p>
+                </div>
+                <div class="stat-box">
+                    <h3 class="count-up" data-target="24">0</h3>
+                    <p>Horas Suporte</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="beneficios" class="section-padding">
+            <div class="container">
+                <div class="section-header fade-in-up">
+                    <h2 class="section-title">Por Que a Tropa?</h2>
+                    <p class="section-subtitle">Diferente dos grupos de telegram que somem com seu dinheiro, aqui nós garantimos a qualidade e o pós-venda.</p>
+                </div>
+
+                <div class="benefits-grid">
+                    <div class="benefit-card fade-in-up">
+                        <div class="icon-box">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+                        </div>
+                        <h3>Atualização Diária</h3>
+                        <p>Nosso sistema roda checkers privados 24h. Bins mortas são removidas automaticamente. Você só vê o que está live.</p>
+                    </div>
+
+                    <div class="benefit-card fade-in-up" style="transition-delay: 100ms;">
+                        <div class="icon-box">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                        <h3>Alta Aprovação</h3>
+                        <p>Material testado nos principais gateways: Mercado Livre, Amazon, Magalu e iFood. Black, Infinite e Platinum com saldos altos.</p>
+                    </div>
+
+                    <div class="benefit-card fade-in-up" style="transition-delay: 200ms;">
+                        <div class="icon-box">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                        </div>
+                        <h3>Entrega Flash</h3>
+                        <p>Sem espera manual. Fez o Pix, o sistema identifica e libera o material no seu painel ou privado imediatamente.</p>
+                    </div>
+
+                    <div class="benefit-card fade-in-up" style="transition-delay: 300ms;">
+                        <div class="icon-box">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        </div>
+                        <h3>Suporte Real</h3>
+                        <p>Teve problema? Deu die na hora (raro)? Chama o suporte. Aqui tem troca justa e ajuda para quem está começando.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding insta-section">
+            <div class="insta-glow-bg"></div>
+            <div class="container fade-in-up">
+                <div class="section-header">
+                    <h2 class="section-title">Quem é a Tropa?</h2>
+                    <p class="section-subtitle">Acompanhe nossa rotina de aprovações. Não somos fantasmas, somos referência.</p>
+                </div>
+
+                <div class="insta-card">
+                    <div class="insta-top-bar">liriozn</div>
+                    
+                    <div class="insta-profile-header">
+                        <div class="insta-avatar-wrapper">
+                            <div class="insta-avatar-ring"></div>
+                            <img src="https://i.imgur.com/9BNOjy7.jpeg" alt="LirioZN" class="insta-avatar-img">
+                        </div>
+                        
+                        <div class="insta-info">
+                            <h3>
+                                liriozn 
+                                <svg class="verified-badge" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10.09 16.26L6.55 12.72L7.96 11.31L10.09 13.43L16.04 7.48L17.45 8.89L10.09 16.26Z" fill="#3897f0"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.09 16.26L17.45 8.89L16.04 7.48L10.09 13.43L7.96 11.31L6.55 12.72L10.09 16.26Z" fill="white"/>
+                                </svg>
+                            </h3>
+                            <span class="insta-category">Empreendedor • Tropa 5:30</span>
+                            <div class="insta-stats-row">
+                                <div><span>7.3K</span> <small>seguidores</small></div>
+                                <div><span>1.2K</span> <small>seguindo</small></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insta-bio">
+                        <p>👑 Líder da Tropa 5:30</p>
+                        <p>✅ Referências de aprovação todo dia</p>
+                        <p>📦 Produtos dropados e entregues</p>
+                        <p>👇 Clique abaixo para conferir</p>
+                    </div>
+
+                    <div class="stories-wrapper">
+                        <div class="story-item">
+                            <div class="story-ring-circle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            <p>Aprovações</p>
+                        </div>
+                        <div class="story-item">
+                            <div class="story-ring-circle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                            </div>
+                            <p>Drops</p>
+                        </div>
+                        <div class="story-item">
+                            <div class="story-ring-circle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                            </div>
+                            <p>Feedbacks</p>
+                        </div>
+                        <div class="story-item">
+                            <div class="story-ring-circle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            </div>
+                            <p>Info</p>
+                        </div>
+                    </div>
+
+                    <div class="insta-action-area">
+                        <a href="https://www.instagram.com/liriozn" target="_blank" class="btn-insta-premium">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                            VERIFICAR PERFIL OFICIAL
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-header fade-in-up">
+                    <h2 class="section-title">Como Comprar?</h2>
+                    <p class="section-subtitle">Processo simplificado para você não perder tempo.</p>
+                </div>
+
+                <div class="steps-container">
+                    <div class="step-item fade-in-up">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h4>Escolha o Material</h4>
+                            <p>Navegue pelo nosso catálogo (clique em Catálogo no menu). Filtre por nível (Gold, Platinum, Black), banco ou bandeira.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item fade-in-up" style="transition-delay: 100ms;">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h4>Pagamento Via Pix</h4>
+                            <p>Selecione a CC desejada e clique em Comprar. Você será direcionado para o pagamento Pix seguro. Copia e Cola.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item fade-in-up" style="transition-delay: 200ms;">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h4>Recebimento Instantâneo</h4>
+                            <p>Assim que o pagamento confirmar (leva segundos), os dados completos da CC (Num, Val, CVV, Nome, CPF) aparecem na sua tela.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 50px;">
+                    <a class='cta-btn' href='/cartoes'>COMEÇAR AGORA</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="regras" class="section-padding" style="position: relative;">
+            <div class="container">
+                <div class="section-header fade-in-up">
+                    <h2 class="section-title text-gold">⚠️ Políticas e Regras</h2>
+                    <p class="section-subtitle">Leia atentamente nossas condições para evitar bloqueios ou falta de garantia. Transparência total.</p>
+                </div>
+
+                <div class="policy-container fade-in-up">
+                    <div class="policy-grid-box">
+                        <div class="policy-item">
+                            <div class="policy-icon">!</div>
+                            <div class="policy-text">
+                                <h5>Não Garantimos Saldo</h5>
+                                <p>Vendemos o material LIVE. O saldo disponível depende exclusivamente do limite do titular e da sorte. Não insista.</p>
+                            </div>
+                        </div>
+
+                        <div class="policy-item">
+                            <div class="policy-icon">✓</div>
+                            <div class="policy-text">
+                                <h5>Garantia de Live (Checker)</h5>
+                                <p>Só aceitamos reclamações de DIE se testado no nosso checker oficial:</p>
+                                <a href="https://checkercc-sariel.netlify.app" target="_blank" class="policy-link">ACESSE O CHECKER AQUI</a>
+                            </div>
+                        </div>
+
+                        <div class="policy-item">
+                            <div class="policy-icon">⏳</div>
+                            <div class="policy-text">
+                                <h5>Troca em 10 Minutos</h5>
+                                <p>Você tem exatamente 10 minutos após a compra para testar e reportar. Passou desse prazo, a garantia expira automaticamente.</p>
+                            </div>
+                        </div>
+
+                        <div class="policy-item">
+                            <div class="policy-icon">⚡</div>
+                            <div class="policy-text">
+                                <h5>Esteja Preparado</h5>
+                                <p>Já tenha o site ou gateway que deseja fazer a aprovação em mãos. Não nos responsabilizamos por demora no uso da info.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section-padding" style="background: rgba(255,255,255,0.01);">
+            <div class="container">
+                <div class="section-header fade-in-up">
+                    <h2 class="section-title">Dúvidas Frequentes</h2>
+                </div>
+
+                <div class="faq-grid fade-in-up">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            As CCs vêm com dados do titular?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </div>
+                        <div class="faq-answer">Sim, entregamos a full info: Nome completo, CPF e endereço (quando disponível na base).</div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Tem garantia de troca?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </div>
+                        <div class="faq-answer">Sim. Se você testar em até 10 minutos após a compra e estiver Die (no nosso checker), nós trocamos ou devolvemos o saldo. Temos política justa.</div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Qual o limite dos cartões?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </div>
+                        <div class="faq-answer">O limite é estimado baseada na categoria (Gold, Platinum, Black). Não temos como saber o saldo exato, mas garantimos cartões de bins selecionadas.</div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            É seguro comprar aqui?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </div>
+                        <div class="faq-answer">100% Seguro. Não pedimos seus dados pessoais e não mantemos logs. O pagamento é via Pix e a entrega é automatizada.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <img src="https://i.imgur.com/9BNOjy7.jpeg" alt="Equipe 5:30" class="footer-logo-premium">
+                    <h4 class="footer-brand-title text-gold">EQUIPE 5:30</h4>
+                    <p class="footer-brand-desc">Referência número #1 em materiais premium no Brasil. Tecnologia de ponta e entrega flash.</p>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h5 class="footer-col-title">Links Úteis</h5>
+                    <ul class="footer-links">
+                        <li><a href='/cartoes'>Catálogo Completo</a></li>
+                        <li><a href="#regras">Termos de Uso</a></li>
+                        <li><a href="#">Política de Reembolso</a></li>
+                        <li><a href="https://chat.whatsapp.com/DZ9PUCDeep702QDgF7cfJu">Suporte 24/7</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-pay-col">
+                    <h5 class="footer-col-title">Pagamento Seguro</h5>
+                    <div class="footer-payment-card">
+                        <div class="payment-pill"><span></span> Pix Automático</div>
+                        <div class="payment-pill" style="opacity: 0.5;"><span></span> Crypto (Em breve)</div>
+                        <p style="font-size: 0.75rem; color: #666; margin-top: 10px;">Processamento em tempo real com liberação instantânea.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="social-row-premium">
+                    <a href="https://www.instagram.com/liriozn" target="_blank" class="social-btn" aria-label="Instagram">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://chat.whatsapp.com/DZ9PUCDeep702QDgF7cfJu" target="_blank" class="social-btn" aria-label="WhatsApp">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </a>
+                </div>
+                <p class="copyright-premium">© 2026 EQUIPE 5:30 - TROPA DE MINAS. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menuToggle');
+        const overlay = document.getElementById('navOverlay');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        function closeMenu() {
+            menuBtn.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const el = entry.target.querySelector('.count-up');
+                    if(el && !el.classList.contains('done')) {
+                        el.classList.add('done');
+                        const target = +el.getAttribute('data-target');
+                        const duration = 2000; 
+                        const increment = target / (duration / 16);
+                        let current = 0;
+                        const updateCount = () => {
+                            current += increment;
+                            if(current < target) {
+                                el.innerText = Math.ceil(current) + (target === 98 ? '%' : '+');
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                el.innerText = target + (target === 98 ? '%' : '+');
+                            }
+                        };
+                        updateCount();
+                    }
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.stat-box').forEach(box => statsObserver.observe(box));
+
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                document.querySelectorAll('.faq-item').forEach(child => {
+                    if (child !== parent) child.classList.remove('active');
+                });
+                parent.classList.toggle('active');
+            });
+        });
+
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+                this.alpha = Math.random() * 0.5;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if(this.x < 0) this.x = width; if(this.x > width) this.x = 0;
+                if(this.y < 0) this.y = height; if(this.y > height) this.y = 0;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = window.innerWidth < 768 ? 40 : 80;
+            for(let i=0; i<count; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            ctx.strokeStyle = 'rgba(212, 175, 55, 0.05)';
+            ctx.lineWidth = 0.5;
+            for(let i=0; i<particles.length; i++) {
+                for(let j=i; j<particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => { resize(); initParticles(); });
+        resize(); initParticles(); animate();
+    </script>
+</body>
+</html>
