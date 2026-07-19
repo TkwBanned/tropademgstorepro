@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<!-- Chatra {literal} -->
-<script>
-    (function(d, w, c) {
-        w.ChatraID = '3utirtXzwiyy4Kver';
-        var s = d.createElement('script');
-        w[c] = w[c] || function() {
-            (w[c].q = w[c].q || []).push(arguments);
-        };
-        s.async = true;
-        s.src = 'https://call.chatra.io/chatra.js';
-        if (d.head) d.head.appendChild(s);
-    })(document, window, 'Chatra');
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a4582b2539b7e1d4b7d2bbc/1jsfod2eq';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
 </script>
-<!-- /Chatra {/literal} -->
+<!--End of Tawk.to Script-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -40,12 +39,12 @@
             --primary: #ffffff;
             --text-muted: #888888;
             
-            --accent-gold: #ffd700;
+            --accent-gold: #d4af37;
             --accent-blue: #3b82f6;
             --accent-green: #10b981;
             --accent-red: #ef4444;
             --accent-purple: #8b5cf6;
-            --color-primary: #FF002E;       /* usado no Pix */
+            --color-primary: #FF002E;
             --color-primary-glow: rgba(255, 0, 46, 0.4);
             --whatsapp: #25D366;
             
@@ -110,7 +109,7 @@
         .ambient-secondary {
             position: fixed;
             width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
             bottom: -100px; right: -100px;
             z-index: -2;
             pointer-events: none;
@@ -363,10 +362,10 @@
             transform: translateY(-2px);
         }
         .filter-btn.active {
-            background: rgba(255, 215, 0, 0.15);
+            background: rgba(212, 175, 55, 0.15);
             border-color: var(--accent-gold);
             color: var(--accent-gold);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
         }
         .filter-count {
             background: rgba(0,0,0,0.4);
@@ -378,31 +377,39 @@
         }
 
         /* =========================================
-           CARTÕES HIPER-REALISTAS (MANTIDO)
+           CARTÕES HIPER-REALISTAS (MANTIDO + AJUSTES)
            ========================================= */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 40px;
+            gap: 50px;
         }
         .card-wrapper {
             position: relative;
             z-index: 1;
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: opacity 0.6s var(--ease-smooth), transform 0.6s var(--ease-smooth);
+        }
+        .card-wrapper.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
         }
         .glass-panel {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 24px;
             padding: 25px;
-            transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s ease;
+            transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s ease, background 0.4s ease, border-color 0.4s ease;
             backdrop-filter: blur(10px);
             display: flex; flex-direction: column; gap: 25px;
+            height: 100%;
         }
         .card-wrapper:hover .glass-panel {
             transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(212, 175, 55, 0.25);
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.5), 0 0 30px rgba(212, 175, 55, 0.05);
         }
         .tag-hot {
             position: absolute;
@@ -412,6 +419,23 @@
             padding: 5px 12px; border-radius: 20px;
             box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
             z-index: 10; letter-spacing: 1px;
+        }
+        .premium-seal {
+            position: absolute;
+            top: -10px; left: 20px;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            z-index: 10;
+            letter-spacing: 1px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         .cc-visual {
             width: 100%;
@@ -541,37 +565,92 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
             padding-bottom: 10px;
         }
-        .detail-title { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .detail-title { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 400; }
         .detail-value { font-family: var(--font-head); font-weight: 700; color: #fff; font-size: 1rem; display: flex; align-items: center; gap: 5px;}
         .price-display {
             font-family: var(--font-head);
             font-size: 2.2rem; font-weight: 900;
-            color: #fff; line-height: 1;
+            color: var(--accent-gold); line-height: 1;
         }
         .price-display small { font-size: 1rem; color: var(--text-muted); font-weight: 400; margin-right: 2px; }
         .btn-buy {
             width: auto;
             min-width: 120px;
             padding: 12px 16px; 
-            border: none; border-radius: 12px;
-            background: #fff; color: #000;
-            font-family: var(--font-head); font-weight: 800; font-size: 0.85rem;
+            border: 1.5px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px;
+            background: rgba(0,0,0,0.4);
+            color: #fff;
+            font-family: var(--font-head); font-weight: 700; font-size: 0.85rem;
             letter-spacing: 1px; text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s;
             display: flex; justify-content: center; align-items: center; gap: 8px;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
         .btn-buy::before {
             content: '';
             position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
             transition: 0.5s;
         }
-        .btn-buy:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(255,255,255,0.4); }
+        .btn-buy:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+            border-color: rgba(212, 175, 55, 0.8);
+            background: rgba(212, 175, 55, 0.1);
+        }
         .btn-buy:hover::before { left: 100%; }
         .btn-buy:active { transform: scale(0.98); }
+
+        /* Score do Dono */
+        .score-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .score-bar-bg {
+            width: 80px;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        .score-text {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .score-icon {
+            font-size: 0.9rem;
+        }
+
+        /* Badge bônus especial */
+        .bonus-badge {
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: #a0c4ff;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+        }
+        .bonus-badge i {
+            color: var(--accent-gold);
+            font-size: 1rem;
+        }
 
         /* =========================================
            FAQ (MANTIDO)
@@ -648,7 +727,7 @@
         .security-badges:hover { opacity: 1; filter: grayscale(0); }
 
         /* =========================================
-           TOAST (MANTIDO)
+           TOAST (AJUSTADO)
            ========================================= */
         .toast-notification {
             position: fixed;
@@ -791,7 +870,7 @@
 
         /* --- NOVA MENSAGEM EXPLICATIVA --- */
         .pix-info-message {
-            background: rgba(255, 215, 0, 0.08);
+            background: rgba(212, 175, 55, 0.08);
             border-left: 3px solid var(--accent-gold);
             border-radius: 12px;
             padding: 12px 16px;
@@ -1471,27 +1550,27 @@
 
     <script>
         // =========================================
-        // 🚀 DADOS DOS PRODUTOS (MANTIDOS)
+        // 🚀 DADOS DOS PRODUTOS (ATUALIZADOS COM NOVOS LIMITES E SCORE)
         // =========================================
         const cardData = [
-            { id: 1, bin: "4532 11** **** ****", bank: "Bradesco", type: "Gold", scheme: "Visa", limit: "R$8.000", price: "38", style: "style-gold", flagColor: "#fff", hot: false },
-            { id: 2, bin: "5162 94** **** ****", bank: "Nubank", type: "Black", scheme: "Mastercard", limit: "R$10.000", price: "105", style: "style-black", flagColor: "#eb001b", hot: true },
-            { id: 3, bin: "4147 20** **** ****", bank: "Itaú", type: "Platinum", scheme: "Visa", limit: "R$9.000", price: "52", style: "style-platinum", flagColor: "#fff", hot: false },
-            { id: 4, bin: "5286 49** **** ****", bank: "Santander", type: "Gold", scheme: "Mastercard", limit: "R$7.000", price: "36", style: "style-gold", flagColor: "#eb001b", hot: false },
-            { id: 5, bin: "4915 66** **** ****", bank: "C6 Bank", type: "Infinite", scheme: "Mastercard", limit: "R$12.000", price: "125", style: "style-infinite", flagColor: "#eb001b", hot: true },
-            { id: 6, bin: "3732 57** **** ****", bank: "Amex", type: "Green", scheme: "Amex", limit: "R$6.000", price: "45", style: "style-classic", flagColor: "#fff", hot: false },
-            { id: 7, bin: "6011 01** **** ****", bank: "Discover", type: "Standard", scheme: "Discover", limit: "R$5.500", price: "29", style: "style-classic", flagColor: "#fff", hot: false },
-            { id: 8, bin: "5221 98** **** ****", bank: "BB", type: "Platinum", scheme: "Mastercard", limit: "R$11.000", price: "55", style: "style-platinum", flagColor: "#eb001b", hot: false },
-            { id: 9, bin: "5200 38** **** ****", bank: "Nubank", type: "Black Ultravioleta", scheme: "Mastercard", limit: "R$28.000", price: "220", style: "style-black", flagColor: "#eb001b", hot: true },
-            { id: 10, bin: "4389 36** **** ****", bank: "Banco Inter", type: "Win Black", scheme: "Mastercard", limit: "R$25.000", price: "190", style: "style-black", flagColor: "#eb001b", hot: true },
-            { id: 11, bin: "5317 06** **** ****", bank: "C6 Bank", type: "Carbon", scheme: "Mastercard", limit: "R$30.000", price: "250", style: "style-black", flagColor: "#eb001b", hot: true },
-            { id: 12, bin: "4551 87** **** ****", bank: "Itaú Personnalité", type: "Black", scheme: "Visa", limit: "R$35.000", price: "280", style: "style-infinite", flagColor: "#fff", hot: true },
-            { id: 13, bin: "5447 66** **** ****", bank: "Bradesco Prime", type: "Visa Infinite", scheme: "Visa", limit: "R$32.000", price: "260", style: "style-platinum", flagColor: "#fff", hot: true },
-            { id: 14, bin: "4910 73** **** ****", bank: "BTG Pactual", type: "Black Advanced", scheme: "Mastercard", limit: "R$40.000", price: "320", style: "style-black", flagColor: "#eb001b", hot: true },
-            { id: 15, bin: "6062 83** **** ****", bank: "Elo", type: "Nanquim Diners", scheme: "Elo", limit: "R$18.000", price: "130", style: "style-infinite", flagColor: "#fff", hot: false },
-            { id: 16, bin: "3648 50** **** ****", bank: "Sicredi", type: "Black", scheme: "Mastercard", limit: "R$22.000", price: "170", style: "style-black", flagColor: "#eb001b", hot: true },
-            { id: 17, bin: "5579 09** **** ****", bank: "Pan", type: "Black", scheme: "Mastercard", limit: "R$20.000", price: "160", style: "style-black", flagColor: "#eb001b", hot: false },
-            { id: 18, bin: "4394 08** **** ****", bank: "Next", type: "Visa Infinite", scheme: "Visa", limit: "R$15.000", price: "120", style: "style-platinum", flagColor: "#fff", hot: false }
+            { id: 1, bin: "4532 11** **** ****", bank: "Bradesco", type: "Gold", scheme: "Visa", limit: "R$2.200", price: "42", style: "style-gold", flagColor: "#fff", hot: false, score: 710 },
+            { id: 2, bin: "5162 94** **** ****", bank: "Nubank", type: "Black", scheme: "Mastercard", limit: "R$5.800", price: "105", style: "style-black", flagColor: "#eb001b", hot: true, score: 820 },
+            { id: 3, bin: "4147 20** **** ****", bank: "Itaú", type: "Platinum", scheme: "Visa", limit: "R$3.500", price: "68", style: "style-platinum", flagColor: "#fff", hot: false, score: 740 },
+            { id: 4, bin: "5286 49** **** ****", bank: "Santander", type: "Gold", scheme: "Mastercard", limit: "R$1.800", price: "36", style: "style-gold", flagColor: "#eb001b", hot: false, score: 580 },
+            { id: 5, bin: "4915 66** **** ****", bank: "C6 Bank", type: "Infinite", scheme: "Mastercard", limit: "R$8.200", price: "148", style: "style-infinite", flagColor: "#eb001b", hot: true, score: 890 },
+            { id: 6, bin: "3732 57** **** ****", bank: "Amex", type: "Green", scheme: "Amex", limit: "R$1.200", price: "29", style: "style-classic", flagColor: "#fff", hot: false, score: 520 },
+            { id: 7, bin: "6011 01** **** ****", bank: "Discover", type: "Standard", scheme: "Discover", limit: "R$1.500", price: "32", style: "style-classic", flagColor: "#fff", hot: false, score: 610 },
+            { id: 8, bin: "5221 98** **** ****", bank: "BB", type: "Platinum", scheme: "Mastercard", limit: "R$3.800", price: "75", style: "style-platinum", flagColor: "#eb001b", hot: false, score: 750 },
+            { id: 9, bin: "5200 38** **** ****", bank: "Nubank", type: "Black Ultravioleta", scheme: "Mastercard", limit: "R$11.000", price: "220", style: "style-black", flagColor: "#eb001b", hot: true, score: 910 },
+            { id: 10, bin: "4389 36** **** ****", bank: "Banco Inter", type: "Win Black", scheme: "Mastercard", limit: "R$9.500", price: "190", style: "style-black", flagColor: "#eb001b", hot: true, score: 880 },
+            { id: 11, bin: "5317 06** **** ****", bank: "C6 Bank", type: "Carbon", scheme: "Mastercard", limit: "R$12.000", price: "250", style: "style-black", flagColor: "#eb001b", hot: true, score: 940 },
+            { id: 12, bin: "4551 87** **** ****", bank: "Itaú Personnalité", type: "Black", scheme: "Visa", limit: "R$10.500", price: "210", style: "style-infinite", flagColor: "#fff", hot: true, score: 870 },
+            { id: 13, bin: "5447 66** **** ****", bank: "Bradesco Prime", type: "Visa Infinite", scheme: "Visa", limit: "R$9.000", price: "180", style: "style-platinum", flagColor: "#fff", hot: true, score: 850 },
+            { id: 14, bin: "4910 73** **** ****", bank: "BTG Pactual", type: "Black Advanced", scheme: "Mastercard", limit: "R$12.000", price: "320", style: "style-black", flagColor: "#eb001b", hot: true, score: 950 },
+            { id: 15, bin: "6062 83** **** ****", bank: "Elo", type: "Nanquim Diners", scheme: "Elo", limit: "R$6.500", price: "130", style: "style-infinite", flagColor: "#fff", hot: false, score: 780 },
+            { id: 16, bin: "3648 50** **** ****", bank: "Sicredi", type: "Black", scheme: "Mastercard", limit: "R$8.800", price: "170", style: "style-black", flagColor: "#eb001b", hot: true, score: 830 },
+            { id: 17, bin: "5579 09** **** ****", bank: "Pan", type: "Black", scheme: "Mastercard", limit: "R$7.200", price: "145", style: "style-black", flagColor: "#eb001b", hot: false, score: 790 },
+            { id: 18, bin: "4394 08** **** ****", bank: "Next", type: "Visa Infinite", scheme: "Visa", limit: "R$6.000", price: "120", style: "style-platinum", flagColor: "#fff", hot: false, score: 760 }
         ];
 
         // =========================================
@@ -1858,7 +1937,7 @@
         }
 
         // =========================================
-        // 🚀 RENDERIZAÇÃO DO GRID (MANTIDA)
+        // 🚀 RENDERIZAÇÃO DO GRID (COM SCORE E BÔNUS)
         // =========================================
         const svgs = {
             visa: `<img src="https://i.imgur.com/mOmOUme.png" alt="Visa">`,
@@ -1884,8 +1963,8 @@
 
             data.forEach((item, index) => {
                 const card = document.createElement('div');
-                card.className = 'card-wrapper fade-in';
-                card.style.transitionDelay = `${index * 50}ms`;
+                card.className = 'card-wrapper';
+                card.style.transitionDelay = `${index * 60}ms`;
                 
                 const isPremium = item.type.includes("Black") || 
                                   item.type.includes("Infinite") || 
@@ -1897,10 +1976,20 @@
 
                 const holoLineHTML = isPremium ? `<div class="holographic-line"></div>` : '';
                 const hotTag = item.hot ? `<div class="tag-hot">🔥 HOT</div>` : '';
+                const premiumSeal = isPremium ? `<div class="premium-seal"><i class="fas fa-crown"></i> PREMIUM</div>` : '';
+
+                // Determinar cor do score
+                const score = item.score || Math.floor(Math.random() * 451) + 500;
+                let scoreColor, scoreEmoji;
+                if (score >= 700) { scoreColor = '#10b981'; scoreEmoji = '🟢'; }
+                else if (score >= 600) { scoreColor = '#f59e0b'; scoreEmoji = '🟡'; }
+                else { scoreColor = '#ef4444'; scoreEmoji = '🔴'; }
+                const scorePercent = ((score - 500) / 450) * 100;
 
                 card.innerHTML = `
                     <div class="glass-panel">
                         ${hotTag}
+                        ${premiumSeal}
                         <div class="cc-visual ${isPremium ? 'premium-card-visual' : ''}">
                             <div class="cc-face ${item.style}"></div>
                             <div class="cc-noise"></div>
@@ -1934,9 +2023,19 @@
                                 <span class="detail-title">Nível</span>
                                 <span class="detail-value" style="color: var(--accent-gold)">${item.type.toUpperCase()}</span>
                             </div>
-                            <div class="detail-row" style="border:none">
+                            <div class="detail-row">
                                 <span class="detail-title">Limite Est.</span>
                                 <span class="detail-value" style="color: var(--accent-green)">${item.limit}</span>
+                            </div>
+                            <div class="detail-row" style="border-bottom: none;">
+                                <span class="detail-title">Score do dono</span>
+                                <div class="score-container">
+                                    <span class="score-icon">${scoreEmoji}</span>
+                                    <div class="score-bar-bg">
+                                        <div class="score-bar-fill" style="width: ${scorePercent}%; background: ${scoreColor};"></div>
+                                    </div>
+                                    <span class="score-text" style="color: ${scoreColor}">${score}</span>
+                                </div>
                             </div>
                             
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px;">
@@ -1945,6 +2044,11 @@
                                     ${svgs.cart} COMPRAR
                                 </button>
                             </div>
+                            ${isPremium ? `
+                            <div class="bonus-badge">
+                                <i class="fas fa-gem"></i>
+                                <span><strong>Bônus Especial:</strong> Converta até 80% do limite em Pix na sua conta. Consulte o suporte após a compra.</span>
+                            </div>` : ''}
                         </div>
                     </div>
                 `;
@@ -1954,7 +2058,8 @@
                 document.getElementById(`btn-buy-${item.id}`).addEventListener('click', () => showPaymentChoice(item));
             });
 
-            // Animação fade-in
+            // Animação de entrada sequencial
+            const cards = document.querySelectorAll('.card-wrapper');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if(entry.isIntersecting) {
@@ -1963,7 +2068,7 @@
                     }
                 });
             }, { threshold: 0.1 });
-            document.querySelectorAll('.card-wrapper.fade-in').forEach(el => observer.observe(el));
+            cards.forEach(el => observer.observe(el));
         }
 
         // =========================================
@@ -2045,9 +2150,18 @@
         setInterval(updateStockSystem, 1000);
         updateStockSystem();
 
-        // Notificações fake
-        const buyers = ["João M.", "Carlos S.", "Pedro H.", "Lucas F.", "Mateus B.", "User_552"];
-        const products = ["Infinite", "Black", "Gold", "Platinum", "Amex Green"];
+        // Notificações fake (AJUSTADO: 45-90 segundos, mais variação)
+        const buyers = [
+            "João M.", "Carlos S.", "Pedro H.", "Lucas F.", "Mateus B.", "User_552",
+            "Ana R.", "Rafaela L.", "Bruno C.", "Fernanda T.", "Gustavo P.", "Mariana S.",
+            "Diego N.", "Camila A.", "Thiago R.", "Larissa M.", "Vinícius D.", "Amanda F.",
+            "Roberto K.", "Patrícia W.", "Eduardo J.", "Bianca Q.", "Samuel C.", "Nicole L."
+        ];
+        const products = [
+            "Infinite", "Black", "Gold", "Platinum", "Amex Green",
+            "Black Ultravioleta", "Carbon", "Nanquim Diners", "Win Black",
+            "Visa Infinite", "Standard"
+        ];
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toast-msg');
 
@@ -2057,9 +2171,12 @@
             toastMsg.innerText = `${randomBuyer} comprou ${randomProd}`;
             toast.classList.add('active');
             setTimeout(() => toast.classList.remove('active'), 4000);
-            setTimeout(showToast, Math.random() * 10000 + 10000);
+            // Intervalo entre 45 e 90 segundos
+            const nextInterval = Math.random() * 45000 + 45000;
+            setTimeout(showToast, nextInterval);
         }
-        setTimeout(showToast, 5000);
+        // Primeiro toast após 8 segundos
+        setTimeout(showToast, 8000);
 
         // Menu mobile
         const menuBtn = document.getElementById('menuBtn');
@@ -2070,16 +2187,16 @@
         }
         menuBtn.addEventListener('click', toggleMenu);
 
-        // Observer geral fade-in
-        const observer = new IntersectionObserver((entries) => {
+        // Observer geral fade-in (para elementos não cards)
+        const observerFade = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+                    observerFade.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-in').forEach(el => observerFade.observe(el));
 
         // Background particles
         const canvas = document.getElementById('bg-canvas');
