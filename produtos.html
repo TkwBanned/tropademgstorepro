@@ -24,7 +24,7 @@ s0.parentNode.insertBefore(s1,s0);
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;700;900&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome 6 (ícones) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -605,34 +605,71 @@ s0.parentNode.insertBefore(s1,s0);
         .btn-buy:hover::before { left: 100%; }
         .btn-buy:active { transform: scale(0.98); }
 
-        /* Score do Dono */
-        .score-container {
+        /* =========================================
+           🆕 BOTÃO DO SCORE NO CARD (NOVO)
+           ========================================= */
+        .score-preview-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-        .score-bar-bg {
-            width: 80px;
-            height: 6px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
+            gap: 10px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 8px 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+            color: #fff;
+            position: relative;
             overflow: hidden;
         }
-        .score-bar-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.5s ease;
+        .score-preview-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        .score-text {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
+        .score-preview-btn:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        .score-preview-btn:hover::after {
+            opacity: 1;
+        }
+        .score-preview-btn:active {
+            transform: scale(0.97);
+        }
+        .score-preview-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px currentColor;
+        }
+        .score-preview-value {
+            font-family: 'JetBrains Mono', 'Space Mono', monospace;
+            font-size: 1.05rem;
             font-weight: 700;
+            letter-spacing: -0.5px;
         }
-        .score-icon {
-            font-size: 0.9rem;
+        .score-preview-arrow {
+            margin-left: auto;
+            font-size: 0.7rem;
+            opacity: 0.5;
+            transition: all 0.3s;
+        }
+        .score-preview-btn:hover .score-preview-arrow {
+            opacity: 1;
+            transform: translateX(3px);
         }
 
-        /* Badge bônus especial */
+        /* =========================================
+           Badge bônus especial
+           ========================================= */
         .bonus-badge {
             background: rgba(59, 130, 246, 0.08);
             border: 1px solid rgba(59, 130, 246, 0.2);
@@ -756,7 +793,7 @@ s0.parentNode.insertBefore(s1,s0);
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         /* =========================================
-           🚀 NOVO MODAL DE PIX - PREMIUM, GLASS, IOS STYLE
+           🚀 MODAL DE PIX - PREMIUM, GLASS, IOS STYLE
            ========================================= */
         .pix-modal-overlay {
             position: fixed;
@@ -868,7 +905,7 @@ s0.parentNode.insertBefore(s1,s0);
             text-align: right;
         }
 
-        /* --- NOVA MENSAGEM EXPLICATIVA --- */
+        /* --- MENSAGEM EXPLICATIVA --- */
         .pix-info-message {
             background: rgba(212, 175, 55, 0.08);
             border-left: 3px solid var(--accent-gold);
@@ -1022,7 +1059,7 @@ s0.parentNode.insertBefore(s1,s0);
         }
         .btn-cancel-pix:active { background: rgba(255,255,255,0.1); }
 
-        /* Loading Overlay (igual pix.html) */
+        /* Loading Overlay */
         .loading-overlay-pix {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -1106,7 +1143,7 @@ s0.parentNode.insertBefore(s1,s0);
         }
 
         /* =========================================
-           🆕 NOVOS MODAIS: ESCOLHA E WHATSAPP
+           🆕 MODAIS: ESCOLHA E WHATSAPP
            ========================================= */
         .choice-buttons {
             display: flex;
@@ -1198,17 +1235,305 @@ s0.parentNode.insertBefore(s1,s0);
         }
         .btn-whatsapp i { font-size: 1.2rem; }
 
-        /* Ajustes responsivos */
+        /* =========================================
+           🆕 MODAL DE SCORE DO DONO (INTEGRADO)
+           ========================================= */
+        .score-modal-overlay {
+            --sm-bg-deep: #080B10;
+            --sm-bg-deep-2: #0D131C;
+            --sm-panel-bg: linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+            --sm-panel-border: rgba(255,255,255,.09);
+            --sm-text-primary: #F3F6FA;
+            --sm-text-muted: #8B96A6;
+            --sm-text-faint: #5B6474;
+            --sm-track-color: rgba(255,255,255,.07);
+            --sm-c-ruim: #E63946;
+            --sm-c-regular: #F2994A;
+            --sm-c-bom: #F2C94C;
+            --sm-c-muitobom: #A9D66C;
+            --sm-c-excelente: #27AE60;
+            --sm-glow-color: rgba(242,201,76,.35);
+            --sm-radius-card: 28px;
+
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(5,7,10,.72);
+            backdrop-filter: blur(10px) saturate(120%);
+            -webkit-backdrop-filter: blur(10px) saturate(120%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .35s ease;
+        }
+        .score-modal-overlay.is-open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .score-modal-card {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            background: var(--sm-panel-bg);
+            border: 1px solid var(--sm-panel-border);
+            border-radius: var(--sm-radius-card);
+            padding: 30px 26px 26px;
+            backdrop-filter: blur(30px) saturate(160%);
+            -webkit-backdrop-filter: blur(30px) saturate(160%);
+            box-shadow:
+                0 30px 90px rgba(0,0,0,.55),
+                inset 0 1px 0 rgba(255,255,255,.06),
+                0 0 70px var(--sm-glow-color);
+            transform: scale(.9) translateY(14px);
+            opacity: 0;
+            transition: transform .45s cubic-bezier(.2,.9,.25,1.2), opacity .35s ease, box-shadow .6s ease;
+        }
+        .score-modal-overlay.is-open .score-modal-card {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .score-modal-close {
+            position: absolute;
+            top: 16px; right: 16px;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.12);
+            background: rgba(255,255,255,.05);
+            color: var(--sm-text-muted);
+            font-size: 16px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .15s ease, color .15s ease, transform .15s ease;
+        }
+        .score-modal-close:hover {
+            background: rgba(255,255,255,.12);
+            color: var(--sm-text-primary);
+            transform: rotate(90deg);
+        }
+
+        .score-modal-eyebrow {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: .68rem;
+            font-weight: 600;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: #F2C94C;
+            margin: 0 0 6px;
+        }
+        .score-modal-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.32rem;
+            font-weight: 700;
+            margin: 0 0 3px;
+            color: var(--sm-text-primary);
+        }
+        .score-modal-subtitle {
+            font-size: .82rem;
+            color: var(--sm-text-muted);
+            margin: 0 0 6px;
+        }
+
+        /* ---------- gauge ---------- */
+        .gauge-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 430 / 350;
+            margin-top: 6px;
+        }
+        .gauge-wrap svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .tick-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            fill: var(--sm-text-faint);
+        }
+
+        .needle-group {
+            transform-box: view-box;
+            transform-origin: 215px 205px;
+        }
+        @keyframes breathe {
+            0%,100% { transform:rotate(0deg); }
+            50% { transform:rotate(.6deg); }
+        }
+        .needle-group.settled {
+            animation: breathe 4.2s ease-in-out infinite;
+        }
+        .needle-shape {
+            filter: drop-shadow(0 0 9px currentColor);
+            transition: fill .25s ease, color .25s ease;
+        }
+        .pivot-glow { transition: fill .25s ease; }
+        .pivot-cap { transition: fill .25s ease; }
+
+        .gauge-center {
+            position: absolute;
+            left: 0; right: 0;
+            top: 62%;
+            bottom: 2%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2px;
+            pointer-events: none;
+        }
+        .gauge-center-eyebrow {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: .62rem;
+            font-weight: 600;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--sm-text-faint);
+        }
+        .gauge-center-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(2.1rem, 9vw, 3rem);
+            font-weight: 700;
+            line-height: 1;
+            color: var(--sm-text-primary);
+            transition: color .25s ease, text-shadow .25s ease;
+            letter-spacing: -.01em;
+        }
+        .gauge-center-pill {
+            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-family: 'Inter', sans-serif;
+            font-size: .74rem;
+            font-weight: 700;
+            transition: background .25s ease, color .25s ease;
+        }
+        .gauge-center-pill .dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* ---------- legenda ---------- */
+        .score-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255,255,255,.07);
+        }
+        .score-legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: .65rem;
+            color: var(--sm-text-faint);
+            font-family: 'Inter', sans-serif;
+        }
+        .score-legend i {
+            width: 7px; height: 7px; border-radius: 50%; display: inline-block;
+        }
+
+        /* ---------- chips ---------- */
+        .score-chips {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .score-chip {
+            flex: 1;
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 14px;
+            padding: 10px 12px;
+            transition: background .2s ease, transform .2s ease;
+        }
+        .score-chip:hover {
+            background: rgba(255,255,255,.08);
+            transform: translateY(-2px);
+        }
+        .score-chip .label {
+            font-size: .64rem;
+            color: var(--sm-text-faint);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: 3px;
+        }
+        .score-chip .value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .86rem;
+            font-weight: 600;
+            color: var(--sm-text-primary);
+            display: flex; align-items: center; gap: 4px;
+        }
+
+        /* ---------- CTA ---------- */
+        .score-cta {
+            width: 100%;
+            margin-top: 16px;
+            padding: 13px 18px;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: .88rem;
+            font-weight: 700;
+            color: #0B1310;
+            background: linear-gradient(120deg, #F2C94C, #6FCF97 65%, #27AE60);
+            background-size: 180% 180%;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: transform .18s ease, box-shadow .18s ease, background-position .5s ease;
+            box-shadow: 0 10px 30px rgba(39,174,96,.25);
+        }
+        .score-cta:hover {
+            transform: translateY(-2px);
+            background-position: 100% 0%;
+            box-shadow: 0 14px 36px rgba(39,174,96,.38);
+        }
+        .score-cta:active { transform: translateY(0); }
+
+        /* ---------- sparks (celebração score excelente) ---------- */
+        .spark {
+            position: absolute;
+            left: 50%; top: 58.6%;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: #FFD86B;
+            box-shadow: 0 0 8px 2px rgba(255,216,107,.8);
+            transform: translate(-50%,-50%);
+            animation: spark-fly .9s ease-out forwards;
+            pointer-events: none;
+        }
+        @keyframes spark-fly {
+            0% { opacity:1; transform:translate(-50%,-50%) scale(1); }
+            100% {
+                opacity: 0;
+                transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(.3);
+            }
+        }
+
         @media (max-width: 480px) {
-            .pix-modal {
-                padding: 24px 16px;
-            }
-            .qr-container img {
-                max-width: 180px;
-            }
-            .choice-btn {
-                padding: 18px 16px;
-            }
+            .score-modal-card { padding: 24px 18px 20px; border-radius: 22px; }
+            .score-chips { flex-direction: column; }
+            .pix-modal { padding: 24px 16px; }
+            .qr-container img { max-width: 180px; }
+            .choice-btn { padding: 18px 16px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
         }
     </style>
 </head>
@@ -1380,7 +1705,7 @@ s0.parentNode.insertBefore(s1,s0);
         <div style="font-size: 0.8rem; color: #444; margin-top: 20px;">© 2026 EQUIPE 5:30. Todos os direitos reservados.</div>
     </footer>
 
-    <!-- ========== 🚀 MODAL PIX (SEM WHATSAPP) ========== -->
+    <!-- ========== 🚀 MODAL PIX ========== -->
     <div class="pix-modal-overlay" id="pixModalOverlay">
         <div class="pix-modal">
             <div class="pix-modal-header">
@@ -1390,7 +1715,6 @@ s0.parentNode.insertBefore(s1,s0);
                 </div>
             </div>
 
-            <!-- Resumo do cartão -->
             <div class="pix-card-summary" id="pixCardSummary">
                 <div class="summary-row">
                     <span class="summary-label">Cartão</span>
@@ -1406,13 +1730,11 @@ s0.parentNode.insertBefore(s1,s0);
                 </div>
             </div>
 
-            <!-- ⚡ MENSAGEM EXPLICATIVA -->
             <div class="pix-info-message">
                 <i class="fas fa-check-circle"></i>
                 <span><strong>Os dados do cartão aparecerão automaticamente na tela assim que o pagamento for confirmado.</strong> Não precisa fechar o aplicativo.</span>
             </div>
 
-            <!-- QR Code -->
             <div class="qr-container" id="qrContainer">
                 <img id="pixQrCode" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=Pagamento%20Premium" alt="QR Code Pix">
                 <div class="qr-logo-pix">
@@ -1420,7 +1742,6 @@ s0.parentNode.insertBefore(s1,s0);
                 </div>
             </div>
 
-            <!-- Código Pix copia e cola -->
             <div class="pix-code-area">
                 <span class="pix-code-truncate" id="pixCodeText">000201... Gerando...</span>
                 <button class="copy-pix-btn" id="copyPixBtn" onclick="PixModal.copyPixCode()">
@@ -1428,14 +1749,12 @@ s0.parentNode.insertBefore(s1,s0);
                 </button>
             </div>
 
-            <!-- Timer 10 minutos -->
             <div class="pix-timer">
                 <i class="fas fa-hourglass-half"></i>
                 <span>Expira em</span>
                 <span id="pixCountdown">10:00</span>
             </div>
 
-            <!-- Botões de ação -->
             <div class="pix-action-buttons">
                 <button class="btn-paid" id="btnJaPaguei" onclick="PixModal.checkAndNotify()">
                     <i class="fas fa-check-circle"></i> JÁ PAGUEI – VERIFICAR
@@ -1482,7 +1801,6 @@ s0.parentNode.insertBefore(s1,s0);
             </div>
 
             <div class="choice-buttons">
-                <!-- Opção PIX Automático -->
                 <div class="choice-btn" id="choosePixBtn">
                     <div class="choice-icon">
                         <i class="fa-brands fa-pix"></i>
@@ -1493,7 +1811,6 @@ s0.parentNode.insertBefore(s1,s0);
                     </div>
                 </div>
 
-                <!-- Opção WhatsApp -->
                 <div class="choice-btn" id="chooseWhatsAppBtn">
                     <div class="choice-icon whatsapp">
                         <i class="fab fa-whatsapp"></i>
@@ -1511,7 +1828,7 @@ s0.parentNode.insertBefore(s1,s0);
         </div>
     </div>
 
-    <!-- ========== 🆕 MODAL WHATSAPP (COM HORÁRIO E BOTÃO) ========== -->
+    <!-- ========== 🆕 MODAL WHATSAPP ========== -->
     <div class="pix-modal-overlay" id="whatsappModal">
         <div class="pix-modal">
             <div class="pix-modal-header">
@@ -1531,13 +1848,11 @@ s0.parentNode.insertBefore(s1,s0);
                 </p>
             </div>
 
-            <!-- Horário de atendimento -->
             <div class="whatsapp-hours">
                 <i class="fas fa-clock"></i>
                 <span><strong>Horário de atendimento:</strong> Segunda a segunda, das 07:00 às 00:00. Fora desse horário o botão é desativado.</span>
             </div>
 
-            <!-- Botão WhatsApp (habilita/desabilita conforme horário) -->
             <button class="btn-whatsapp" id="whatsappActionBtn" onclick="openWhatsAppWithCard()">
                 <i class="fab fa-whatsapp"></i> ENVIAR MENSAGEM
             </button>
@@ -1548,9 +1863,66 @@ s0.parentNode.insertBefore(s1,s0);
         </div>
     </div>
 
+    <!-- ========== 🆕 MODAL DE SCORE DO DONO ========== -->
+    <div class="score-modal-overlay" id="scoreModalOverlay">
+        <div class="score-modal-card" role="dialog" aria-modal="true" aria-labelledby="scoreModalTitle">
+
+            <button class="score-modal-close" aria-label="Fechar" onclick="ScoreGauge.close()">✕</button>
+
+            <p class="score-modal-eyebrow">Perfil do Titular</p>
+            <h2 class="score-modal-title" id="scoreModalTitle">Score do Dono do Cartão</h2>
+            <p class="score-modal-subtitle">Pontuação de crédito do titular original · Via Open Finance</p>
+
+            <div class="gauge-wrap" id="gaugeWrap">
+                <svg viewBox="0 0 430 350" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="pivotBlur" x="-100%" y="-100%" width="300%" height="300%">
+                            <feGaussianBlur stdDeviation="7"/>
+                        </filter>
+                    </defs>
+                    <g id="gaugeStatic"></g>
+                    <g class="needle-group" id="needleGroup">
+                        <circle class="pivot-glow" id="pivotGlow" cx="215" cy="205" r="22" filter="url(#pivotBlur)" fill="#F2C94C" opacity=".55"/>
+                        <polygon class="needle-shape" id="needleShape" fill="#F2C94C" style="color:#F2C94C"></polygon>
+                        <circle class="pivot-cap" id="pivotCap" cx="215" cy="205" r="12" fill="#F2C94C"/>
+                        <circle cx="211" cy="201" r="3.4" fill="rgba(255,255,255,.75)"/>
+                    </g>
+                </svg>
+
+                <div class="gauge-center">
+                    <span class="gauge-center-eyebrow">Pontuação</span>
+                    <span class="gauge-center-number" id="scoreNumber">0</span>
+                    <span class="gauge-center-pill" id="scorePill"><i class="dot"></i><span id="scorePillText">—</span></span>
+                </div>
+            </div>
+
+            <div class="score-legend">
+                <span><i style="background:#E63946"></i>Ruim</span>
+                <span><i style="background:#F2994A"></i>Regular</span>
+                <span><i style="background:#F2C94C"></i>Bom</span>
+                <span><i style="background:#A9D66C"></i>Muito bom</span>
+                <span><i style="background:#27AE60"></i>Excelente</span>
+            </div>
+
+            <div class="score-chips">
+                <div class="score-chip">
+                    <div class="label">Tipo do Cartão</div>
+                    <div class="value" id="scoreChipType">—</div>
+                </div>
+                <div class="score-chip">
+                    <div class="label">Limite Estimado</div>
+                    <div class="value" id="scoreChipLimit">—</div>
+                </div>
+            </div>
+
+            <button class="score-cta" onclick="ScoreGauge.close()">Fechar análise →</button>
+
+        </div>
+    </div>
+
     <script>
         // =========================================
-        // 🚀 DADOS DOS PRODUTOS (ATUALIZADOS COM NOVOS LIMITES E SCORE)
+        // 🚀 DADOS DOS PRODUTOS
         // =========================================
         const cardData = [
             { id: 1, bin: "4532 11** **** ****", bank: "Bradesco", type: "Gold", scheme: "Visa", limit: "R$2.200", price: "42", style: "style-gold", flagColor: "#fff", hot: false, score: 710 },
@@ -1574,7 +1946,7 @@ s0.parentNode.insertBefore(s1,s0);
         ];
 
         // =========================================
-        // 🚀 CONFIGURAÇÕES DA API INVICTUSPAY (do pix.html)
+        // 🚀 CONFIGURAÇÕES DA API INVICTUSPAY
         // =========================================
         const CONFIG = {
             token: 'rLphIvZ0Ne3Z2DSAKPeNC4weZzrLa0YgXUpABEsAWI2KxCHSIF8fyMGr3QVH',
@@ -1584,7 +1956,7 @@ s0.parentNode.insertBefore(s1,s0);
         };
 
         // =========================================
-        // 🚀 LISTAS DE DADOS MOCK (CPF, EMAIL, etc)
+        // 🚀 LISTAS DE DADOS MOCK
         // =========================================
         const CPF_LIST = ["091.768.090-13", "911.807.080-91", "629.064.960-49", "063.409.100-09", "317.755.130-84", "985.407.060-32", "985.407.060-32", "614.723.900-75", "942.844.230-53", "894.880.450-27", "147.584.300-39", "892.304.420-20", "183.124.550-78", "998.234.930-90", "144.539.370-08", "213.250.830-54", "092.581.220-03", "302.192.250-36", "232.637.320-05", "716.792.430-04", "210.833.650-88", "341.212.290-45", "555.858.640-09", "071.981.610-65", "822.694.180-69", "210.165.950-69", "342.364.800-77", "484.283.610-53", "768.350.570-68", "225.559.580-02", "510.362.710-80", "975.255.470-92", "311.960.880-71", "357.359.920-66", "622.329.970-22", "175.721.890-40", "363.346.010-16", "770.038.480-07", "551.176.610-01", "024.537.710-78", "748.984.460-60", "635.214.120-08", "234.898.350-85", "694.072.910-06", "187.748.350-84", "220.141.520-04", "835.441.120-60", "510.253.220-02", "905.955.540-67", "110.174.160-01", "269.990.840-17", "718.110.940-58", "376.800.620-48", "991.520.400-03", "661.088.080-80", "666.178.310-98", "879.822.100-07", "907.619.660-56", "041.231.430-40", "644.054.990-12", "053.773.610-75", "053.773.610-75", "635.778.920-80", "537.390.220-94", "825.654.370-13", "493.494.350-12", "705.490.060-01"];
         const EMAIL_LIST = ["lucas.silva98@gmail.com", "ana.rodrigues23@gmail.com", "pedro.henrique.oliveira@gmail.com", "juliana.martins@gmail.com", "rafael.costa1987@gmail.com", "fernanda.alves@gmail.com", "bruno.santos01@gmail.com", "mariana.lima@gmail.com", "guilherme.neves@gmail.com", "camila.goncalves@gmail.com", "diego.souza.tech@gmail.com", "larissa.pereira@gmail.com", "vinicius.ribeiro@gmail.com", "amanda.ferreira@gmail.com", "leonardo.cavalcanti@gmail.com", "beatriz.rocha92@gmail.com", "gustavo.monteiro@gmail.com", "isabela.cardoso@gmail.com", "renato.barros@gmail.com", "carolina.nascimento@gmail.com", "thiago.oliveira.contato@gmail.com", "patricia.machado@gmail.com", "felipe.moura.oficial@gmail.com", "vanessa.silveira@gmail.com", "roberto.miranda82@gmail.com", "tatiana.castro@gmail.com", "andre.luiz.santana@gmail.com", "daniela.andrade.prof@gmail.com", "joao.gabriel.lopes@gmail.com", "sara.brito@gmail.com", "antonio.carvalho.adv@gmail.com", "elaine.freitas@gmail.com", "caio.mendes@gmail.com", "nicole.ramos@gmail.com", "paulo.sergio.correia@gmail.com", "lais.duarte99@gmail.com", "eduardo.junqueira@gmail.com", "gabriela.queiroz@gmail.com", "ricardo.morais77@gmail.com", "julia.werner@gmail.com", "samuel.tavares.dev@gmail.com", "luciana.teixeira@gmail.com", "henrique.malta@gmail.com", "aline.porto.psi@gmail.com", "marcos.vinicius.pinto@gmail.com", "raquel.dornelas@gmail.com", "igor.fonseca@gmail.com", "bianca.leal.design@gmail.com", "otavio.reis.eng@gmail.com", "clarissa.mota.rh@gmail.com"];
@@ -1594,16 +1966,16 @@ s0.parentNode.insertBefore(s1,s0);
         // =========================================
         // 🚀 ESTADO DO PIX E DO CARD SELECIONADO
         // =========================================
-        let selectedCard = null; // para os novos modais
+        let selectedCard = null;
 
         const PixState = {
-            currentAmount: 0,         // em centavos
+            currentAmount: 0,
             rawPixCode: "",
             transactionHash: null,
             pollingInterval: null,
             timerInterval: null,
-            expiryTime: null,        // timestamp (ms)
-            cardDetails: null,       // objeto do cartão selecionado
+            expiryTime: null,
+            cardDetails: null,
             customerEmail: "",
             customerName: ""
         };
@@ -1628,7 +2000,7 @@ s0.parentNode.insertBefore(s1,s0);
         };
 
         // =========================================
-        // 🚀 API CONTROLLER (adaptado do pix.html)
+        // 🚀 API CONTROLLER
         // =========================================
         const PixAPI = {
             async createTransaction(amount) {
@@ -1688,7 +2060,7 @@ s0.parentNode.insertBefore(s1,s0);
         };
 
         // =========================================
-        // 🚀 GERENCIADOR DO MODAL PIX (SEM WHATSAPP)
+        // 🚀 GERENCIADOR DO MODAL PIX
         // =========================================
         const PixModal = {
             async open(card) {
@@ -1886,7 +2258,7 @@ s0.parentNode.insertBefore(s1,s0);
         };
 
         // =========================================
-        // 🆕 NOVAS FUNÇÕES PARA OS MODAIS DE ESCOLHA E WHATSAPP
+        // 🆕 MODAIS DE ESCOLHA E WHATSAPP
         // =========================================
         function showPaymentChoice(card) {
             selectedCard = card;
@@ -1899,7 +2271,6 @@ s0.parentNode.insertBefore(s1,s0);
 
         function openWhatsAppModal() {
             closePaymentChoice();
-            // Atualiza estado do botão conforme horário
             updateWhatsAppButtonState();
             document.getElementById('whatsappModal').classList.add('active');
         }
@@ -1911,8 +2282,6 @@ s0.parentNode.insertBefore(s1,s0);
         function isWithinServiceHours() {
             const now = new Date();
             const hours = now.getHours();
-            const minutes = now.getMinutes();
-            // 07:00 até 23:59 (consideramos que 00:00 é fechado, pois é após meia-noite)
             return hours >= 7 && hours < 24;
         }
 
@@ -1937,7 +2306,280 @@ s0.parentNode.insertBefore(s1,s0);
         }
 
         // =========================================
-        // 🚀 RENDERIZAÇÃO DO GRID (COM SCORE E BÔNUS)
+        // 🆕 SCORE DO DONO — MODAL COM GAUGE ANIMADO
+        // =========================================
+        (function(){
+            "use strict";
+
+            var CFG = {
+                cx: 215, cy: 205, R: 150,
+                strokeWidth: 24,
+                needleLen: 128, tailLen: 16, needleHalfWidth: 6,
+                min: 0, max: 1000
+            };
+
+            var BANDS = [
+                { name:"Ruim",      min:0,   max:300,  color:"#E63946" },
+                { name:"Regular",   min:300, max:500,  color:"#F2994A" },
+                { name:"Bom",       min:500, max:700,  color:"#F2C94C" },
+                { name:"Muito bom", min:700, max:850,  color:"#A9D66C" },
+                { name:"Excelente", min:850, max:1000, color:"#27AE60" }
+            ];
+
+            function getBand(value){
+                for (var i=0;i<BANDS.length;i++){
+                    if (value >= BANDS[i].min && value <= BANDS[i].max) return BANDS[i];
+                }
+                return BANDS[BANDS.length-1];
+            }
+
+            function valueToAngle(value){
+                var clamped = Math.max(CFG.min, Math.min(CFG.max, value));
+                var frac = (clamped - CFG.min) / (CFG.max - CFG.min);
+                return 180 - frac*180;
+            }
+
+            function polar(cx, cy, r, angleDeg){
+                var a = angleDeg * Math.PI / 180;
+                return { x: cx + r*Math.cos(a), y: cy - r*Math.sin(a) };
+            }
+
+            function describeArc(cx, cy, r, startAngle, endAngle){
+                var start = polar(cx, cy, r, startAngle);
+                var end = polar(cx, cy, r, endAngle);
+                var largeArcFlag = Math.abs(startAngle-endAngle) <= 180 ? "0" : "1";
+                return "M "+start.x+" "+start.y+" A "+r+" "+r+" 0 "+largeArcFlag+" 1 "+end.x+" "+end.y;
+            }
+
+            function hexToRgba(hex, alpha){
+                var r = parseInt(hex.slice(1,3),16);
+                var g = parseInt(hex.slice(3,5),16);
+                var b = parseInt(hex.slice(5,7),16);
+                return "rgba("+r+","+g+","+b+","+alpha+")";
+            }
+
+            var NS = "http://www.w3.org/2000/svg";
+            function svgEl(tag, attrs){
+                var el = document.createElementNS(NS, tag);
+                for (var k in attrs){ el.setAttribute(k, attrs[k]); }
+                return el;
+            }
+
+            /* ---------------- construção estática do mostrador ---------------- */
+            function buildStaticGauge(){
+                var g = document.getElementById("gaugeStatic");
+
+                // trilho de fundo
+                g.appendChild(svgEl("path", {
+                    d: describeArc(CFG.cx, CFG.cy, CFG.R, 180, 0),
+                    stroke: "var(--sm-track-color)",
+                    "stroke-width": CFG.strokeWidth + 6,
+                    fill: "none",
+                    "stroke-linecap": "round"
+                }));
+
+                // segmentos coloridos
+                var boundaries = [0,300,500,700,850,1000];
+                var gap = 1.5;
+                for (var i=0;i<BANDS.length;i++){
+                    var b = BANDS[i];
+                    var a0 = valueToAngle(b.min);
+                    var a1 = valueToAngle(b.max);
+                    var start = (i===0) ? a0 : a0 - gap;
+                    var end = (i===BANDS.length-1) ? a1 : a1 + gap;
+                    g.appendChild(svgEl("path", {
+                        d: describeArc(CFG.cx, CFG.cy, CFG.R, start, end),
+                        stroke: b.color,
+                        "stroke-width": CFG.strokeWidth,
+                        fill: "none",
+                        "stroke-linecap": "round",
+                        opacity: "0.95"
+                    }));
+                }
+
+                // brilho interno
+                g.appendChild(svgEl("path", {
+                    d: describeArc(CFG.cx, CFG.cy, CFG.R - 10, 180, 0),
+                    stroke: "rgba(255,255,255,.14)",
+                    "stroke-width": 2,
+                    fill: "none",
+                    "stroke-linecap": "round"
+                }));
+
+                // marcas a cada 50 pontos
+                for (var v=0; v<=1000; v+=50){
+                    var angle = valueToAngle(v);
+                    var isMajor = (v===0 || v===500 || v===1000);
+                    var rInner = CFG.R + 14;
+                    var rOuter = CFG.R + (isMajor ? 30 : 22);
+                    var p1 = polar(CFG.cx, CFG.cy, rInner, angle);
+                    var p2 = polar(CFG.cx, CFG.cy, rOuter, angle);
+                    g.appendChild(svgEl("line", {
+                        x1:p1.x, y1:p1.y, x2:p2.x, y2:p2.y,
+                        stroke: isMajor ? "rgba(255,255,255,.45)" : "rgba(255,255,255,.22)",
+                        "stroke-width": isMajor ? 2.4 : 1.4,
+                        "stroke-linecap":"round"
+                    }));
+
+                    if (isMajor){
+                        var lp = polar(CFG.cx, CFG.cy, CFG.R + 50, angle);
+                        var anchor = angle > 135 ? "end" : (angle < 45 ? "start" : "middle");
+                        var label = svgEl("text", {
+                            x:lp.x, y:lp.y + 4, "text-anchor":anchor, class:"tick-label"
+                        });
+                        label.textContent = v;
+                        g.appendChild(label);
+                    }
+                }
+            }
+
+            /* ---------------- animação ---------------- */
+            var currentDisplayed = 0;
+            var rafId = null;
+
+            function easeOutBack(t){
+                var c1 = 1.70158, c3 = c1 + 1;
+                return 1 + c3*Math.pow(t-1,3) + c1*Math.pow(t-1,2);
+            }
+
+            function needlePoints(angle){
+                var tip = polar(CFG.cx, CFG.cy, CFG.needleLen, angle);
+                var tail = polar(CFG.cx, CFG.cy, CFG.tailLen, angle+180);
+                var leftBase = polar(CFG.cx, CFG.cy, CFG.needleHalfWidth, angle+90);
+                var rightBase = polar(CFG.cx, CFG.cy, CFG.needleHalfWidth, angle-90);
+                return tip.x+","+tip.y+" "+leftBase.x+","+leftBase.y+" "+tail.x+","+tail.y+" "+rightBase.x+","+rightBase.y;
+            }
+
+            var elNumber = document.getElementById("scoreNumber");
+            var elPillText = document.getElementById("scorePillText");
+            var elPill = document.getElementById("scorePill");
+            var elNeedle = document.getElementById("needleShape");
+            var elPivotGlow = document.getElementById("pivotGlow");
+            var elPivotCap = document.getElementById("pivotCap");
+            var elNeedleGroup = document.getElementById("needleGroup");
+            var elCard = document.querySelector(".score-modal-card");
+
+            var lastBandName = null;
+
+            function render(value){
+                var angle = valueToAngle(value);
+                var band = getBand(value);
+
+                elNeedle.setAttribute("points", needlePoints(angle));
+                elNeedle.style.fill = band.color;
+                elNeedle.style.color = band.color;
+                elPivotGlow.setAttribute("fill", band.color);
+                elPivotCap.setAttribute("fill", band.color);
+
+                elNumber.textContent = Math.round(value);
+                elNumber.style.color = band.color;
+                elNumber.style.textShadow = "0 0 26px " + hexToRgba(band.color, .45);
+
+                elPillText.textContent = band.name;
+                elPill.style.color = band.color;
+                elPill.style.background = hexToRgba(band.color, .14);
+
+                if (band.name !== lastBandName){
+                    lastBandName = band.name;
+                    elCard.style.boxShadow =
+                        "0 30px 90px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06), 0 0 70px " + hexToRgba(band.color, .28);
+                }
+            }
+
+            function animateGauge(target, opts){
+                opts = opts || {};
+                var duration = opts.duration || 2200;
+                var from = (opts.from !== undefined) ? opts.from : currentDisplayed;
+                var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                if (reduced) duration = 1;
+
+                elNeedleGroup.classList.remove("settled");
+                if (rafId) cancelAnimationFrame(rafId);
+
+                var start = null;
+                function tick(ts){
+                    if (!start) start = ts;
+                    var t = Math.min(1, (ts-start)/duration);
+                    var eased = easeOutBack(t);
+                    var raw = from + (target-from)*eased;
+                    var clamped = Math.max(CFG.min, Math.min(CFG.max, raw));
+                    render(clamped);
+
+                    if (t < 1){
+                        rafId = requestAnimationFrame(tick);
+                    } else {
+                        render(target);
+                        currentDisplayed = target;
+                        elNeedleGroup.classList.add("settled");
+                        if (getBand(target).name === "Excelente"){ celebrate(); }
+                    }
+                }
+                rafId = requestAnimationFrame(tick);
+            }
+
+            /* ---------------- celebração (score excelente) ---------------- */
+            function celebrate(){
+                var wrap = document.getElementById("gaugeWrap");
+                for (var i=0;i<16;i++){
+                    (function(){
+                        var angle = Math.random()*Math.PI*2;
+                        var dist = 45 + Math.random()*70;
+                        var s = document.createElement("span");
+                        s.className = "spark";
+                        s.style.setProperty("--dx", (Math.cos(angle)*dist)+"px");
+                        s.style.setProperty("--dy", (Math.sin(angle)*dist)+"px");
+                        s.style.animationDelay = (Math.random()*150)+"ms";
+                        wrap.appendChild(s);
+                        setTimeout(function(){ s.remove(); }, 1300);
+                    })();
+                }
+            }
+
+            /* ---------------- abrir / fechar modal ---------------- */
+            var overlay = document.getElementById("scoreModalOverlay");
+
+            function openModal(score, cardInfo){
+                // Preenche os chips com info do cartão
+                document.getElementById("scoreChipType").textContent = cardInfo ? cardInfo.type : "—";
+                document.getElementById("scoreChipLimit").textContent = cardInfo ? cardInfo.limit : "—";
+
+                overlay.classList.add("is-open");
+                document.body.style.overflow = "hidden";
+                render(0);
+                currentDisplayed = 0;
+                animateGauge(score, { from: 0 });
+            }
+
+            function closeModal(){
+                overlay.classList.remove("is-open");
+                document.body.style.overflow = "";
+            }
+
+            overlay.addEventListener("click", function(e){
+                if (e.target === overlay) closeModal();
+            });
+            document.addEventListener("keydown", function(e){
+                if (e.key === "Escape") closeModal();
+            });
+
+            /* ---------------- API pública ---------------- */
+            window.ScoreGauge = {
+                open: openModal,
+                close: closeModal,
+                setScore: function(v){ animateGauge(v, { from: currentDisplayed }); }
+            };
+
+            buildStaticGauge();
+            render(0);
+        })();
+
+        // Função global para abrir o modal de score a partir do card
+        function openScoreModal(card) {
+            ScoreGauge.open(card.score, card);
+        }
+
+        // =========================================
+        // 🚀 RENDERIZAÇÃO DO GRID (COM BOTÃO DE SCORE)
         // =========================================
         const svgs = {
             visa: `<img src="https://i.imgur.com/mOmOUme.png" alt="Visa">`,
@@ -1978,13 +2620,12 @@ s0.parentNode.insertBefore(s1,s0);
                 const hotTag = item.hot ? `<div class="tag-hot">🔥 HOT</div>` : '';
                 const premiumSeal = isPremium ? `<div class="premium-seal"><i class="fas fa-crown"></i> PREMIUM</div>` : '';
 
-                // Determinar cor do score
+                // Determinar cor do score para o botão
                 const score = item.score || Math.floor(Math.random() * 451) + 500;
-                let scoreColor, scoreEmoji;
-                if (score >= 700) { scoreColor = '#10b981'; scoreEmoji = '🟢'; }
-                else if (score >= 600) { scoreColor = '#f59e0b'; scoreEmoji = '🟡'; }
-                else { scoreColor = '#ef4444'; scoreEmoji = '🔴'; }
-                const scorePercent = ((score - 500) / 450) * 100;
+                let scoreColor;
+                if (score >= 700) { scoreColor = '#10b981'; }
+                else if (score >= 600) { scoreColor = '#f59e0b'; }
+                else { scoreColor = '#ef4444'; }
 
                 card.innerHTML = `
                     <div class="glass-panel">
@@ -2029,13 +2670,11 @@ s0.parentNode.insertBefore(s1,s0);
                             </div>
                             <div class="detail-row" style="border-bottom: none;">
                                 <span class="detail-title">Score do dono</span>
-                                <div class="score-container">
-                                    <span class="score-icon">${scoreEmoji}</span>
-                                    <div class="score-bar-bg">
-                                        <div class="score-bar-fill" style="width: ${scorePercent}%; background: ${scoreColor};"></div>
-                                    </div>
-                                    <span class="score-text" style="color: ${scoreColor}">${score}</span>
-                                </div>
+                                <button class="score-preview-btn" id="score-btn-${item.id}" title="Clique para ver análise completa do score">
+                                    <span class="score-preview-dot" style="background: ${scoreColor}; color: ${scoreColor};"></span>
+                                    <span class="score-preview-value" style="color: ${scoreColor}">${score}</span>
+                                    <span class="score-preview-arrow"><i class="fas fa-chevron-right"></i></span>
+                                </button>
                             </div>
                             
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px;">
@@ -2056,6 +2695,12 @@ s0.parentNode.insertBefore(s1,s0);
                 
                 // Evento de compra → abre o modal de escolha
                 document.getElementById(`btn-buy-${item.id}`).addEventListener('click', () => showPaymentChoice(item));
+                
+                // Evento do botão de score → abre o modal de score
+                document.getElementById(`score-btn-${item.id}`).addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openScoreModal(item);
+                });
             });
 
             // Animação de entrada sequencial
@@ -2072,7 +2717,7 @@ s0.parentNode.insertBefore(s1,s0);
         }
 
         // =========================================
-        // 🚀 FILTROS (MANTIDOS)
+        // 🚀 FILTROS
         // =========================================
         const filterListEl = document.getElementById('filterList');
         const filters = [
@@ -2111,7 +2756,7 @@ s0.parentNode.insertBefore(s1,s0);
         }
 
         // =========================================
-        // 🚀 DEMAIS FUNÇÕES (FAQ, estoque, menu, toast, partículas)
+        // 🚀 DEMAIS FUNÇÕES
         // =========================================
         // FAQ
         const faqs = document.querySelectorAll('.faq-question');
@@ -2150,7 +2795,7 @@ s0.parentNode.insertBefore(s1,s0);
         setInterval(updateStockSystem, 1000);
         updateStockSystem();
 
-        // Notificações fake (AJUSTADO: 45-90 segundos, mais variação)
+        // Notificações fake
         const buyers = [
             "João M.", "Carlos S.", "Pedro H.", "Lucas F.", "Mateus B.", "User_552",
             "Ana R.", "Rafaela L.", "Bruno C.", "Fernanda T.", "Gustavo P.", "Mariana S.",
@@ -2171,11 +2816,9 @@ s0.parentNode.insertBefore(s1,s0);
             toastMsg.innerText = `${randomBuyer} comprou ${randomProd}`;
             toast.classList.add('active');
             setTimeout(() => toast.classList.remove('active'), 4000);
-            // Intervalo entre 45 e 90 segundos
             const nextInterval = Math.random() * 45000 + 45000;
             setTimeout(showToast, nextInterval);
         }
-        // Primeiro toast após 8 segundos
         setTimeout(showToast, 8000);
 
         // Menu mobile
@@ -2187,7 +2830,7 @@ s0.parentNode.insertBefore(s1,s0);
         }
         menuBtn.addEventListener('click', toggleMenu);
 
-        // Observer geral fade-in (para elementos não cards)
+        // Observer fade-in
         const observerFade = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
@@ -2241,16 +2884,13 @@ s0.parentNode.insertBefore(s1,s0);
         initFilters();
         renderGrid(cardData);
 
-        // Event listeners para os novos botões dos modais
+        // Event listeners para os botões dos modais
         document.getElementById('choosePixBtn').addEventListener('click', () => {
             closePaymentChoice();
             PixModal.open(selectedCard);
         });
 
         document.getElementById('chooseWhatsAppBtn').addEventListener('click', openWhatsAppModal);
-
-        // Atualiza estado do botão WhatsApp sempre que o modal abrir
-        // (já é chamado no openWhatsAppModal)
     </script>
 </body>
 </html>
