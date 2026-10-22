@@ -2418,7 +2418,7 @@
                 if (!PixState.cardDetails) return;
                 const card = PixState.cardDetails;
                 const message = `🟢 *PAGAMENTO CONFIRMADO!* \n\nAcabei de pagar o cartão *${card.bank} ${card.type} (${card.scheme})* no valor de *R$ ${card.price},00*. \n\nAguardo o envio dos dados. Obrigado!`;
-                const waLink = `https://wa.me/5511999568121?text=${encodeURIComponent(message)}`;
+                const waLink = `https://wa.me/${getWhatsAppTarget()}?text=${encodeURIComponent(message)}`;
                 window.open(waLink, '_blank');
                 PixModal.closeSuccess();
             },
@@ -2502,6 +2502,11 @@
             return new Date().getHours() < 7;
         }
 
+        // 00:00 às 07:00 → número do suporte automático | 07:00 às 00:00 → número normal
+        function getWhatsAppTarget() {
+            return isNightShift() ? '5531987864342' : '5511999568121';
+        }
+
         function updateWhatsAppButtonState() {
             // Botão ativo 24h por dia — o horário só define quem responde
             const btn = document.getElementById('whatsappActionBtn');
@@ -2529,7 +2534,7 @@
                 const ok = confirm('⏰ Agora está fora do horário do atendimento humano (07:00 às 00:00).\n\nNeste período o suporte é automatizado por uma IA humanizada, com resposta automática até as 07:00.\n\nEnviar a mensagem mesmo assim?');
                 if (!ok) return;
             }
-            const waLink = `https://wa.me/5511999568121?text=${encodeURIComponent(message)}`;
+            const waLink = `https://wa.me/${getWhatsAppTarget()}?text=${encodeURIComponent(message)}`;
             window.open(waLink, '_blank');
             closeWhatsAppModal();
         }
