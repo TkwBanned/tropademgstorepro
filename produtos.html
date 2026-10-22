@@ -1464,6 +1464,12 @@
             filter: none;
         }
         .btn-whatsapp i { font-size: 1.2rem; }
+        /* Estado noturno: suporte por IA (00:00 às 07:00) */
+        .whatsapp-hours.night {
+            background: rgba(139, 92, 246, 0.1);
+            border-left-color: var(--accent-purple);
+        }
+        .whatsapp-hours.night i { color: var(--accent-purple); }
 
         /* =========================================
            🆕 MODAL DE SCORE DO DONO (INTEGRADO)
@@ -2081,17 +2087,18 @@
                 </p>
             </div>
 
-            <div class="whatsapp-hours">
+            <div class="whatsapp-hours" id="whatsappStatus">
                 <i class="fas fa-clock"></i>
-                <span><strong>Horário de atendimento:</strong> Segunda a segunda, das 07:00 às 00:00. Fora desse horário o botão é desativado.</span>
+                <span id="whatsappStatusText"><strong>Atendimento 24h por dia:</strong> das 07:00 às 00:00 um humano responde normalmente; das 00:00 às 07:00 o suporte é automatizado por uma IA humanizada.</span>
             </div>
 
             <button class="btn-whatsapp" id="whatsappActionBtn" onclick="openWhatsAppWithCard()">
-                <i class="fab fa-whatsapp"></i> ENVIAR MENSAGEM
+                <i class="fab fa-whatsapp"></i> ENVIAR MENSAGEM · 24H
             </button>
 
             <p style="font-size: 0.7rem; color: #666; text-align: center; margin-top: 20px;">
-                Assim que enviar, aguarde nossa resposta. O tempo médio é de 5 minutos.
+                Assim que enviar, aguarde nossa resposta. O tempo médio é de 5 minutos.<br>
+                Das 00:00 às 07:00 a primeira resposta é da nossa IA — um humano assume às 07:00.
             </p>
         </div>
     </div>
@@ -2490,21 +2497,38 @@
             return hours >= 7 && hours < 24;
         }
 
+        // 00:00 às 07:00 → suporte automatizado por IA | demais horários → humano
+        function isNightShift() {
+            return new Date().getHours() < 7;
+        }
+
         function updateWhatsAppButtonState() {
+            // Botão ativo 24h por dia — o horário só define quem responde
             const btn = document.getElementById('whatsappActionBtn');
-            if (isWithinServiceHours()) {
-                btn.disabled = false;
-                btn.style.opacity = '1';
+            btn.disabled = false;
+            btn.style.opacity = '1';
+
+            const status = document.getElementById('whatsappStatus');
+            const text = document.getElementById('whatsappStatusText');
+            if (isNightShift()) {
+                status.classList.add('night');
+                text.innerHTML = '<strong>Agora: suporte automatizado</strong> por uma IA humanizada (resposta automática até as 07:00).<br>Das 07:00 às 00:00 um humano responde normalmente.';
             } else {
-                btn.disabled = true;
-                btn.style.opacity = '0.4';
+                status.classList.remove('night');
+                text.innerHTML = '<strong>Agora: atendimento humano</strong> (07:00 às 00:00) — resposta normal de um atendente.<br>Das 00:00 às 07:00 o suporte passa a ser automatizado por IA.';
             }
         }
 
         function openWhatsAppWithCard() {
             if (!selectedCard) return;
             const card = selectedCard;
-            const message = `🟢 *COMPRA VIA WHATSAPP* \n\nOlá, quero comprar o cartão *${card.bank} ${card.type} (${card.scheme})* no valor de *R$ ${card.price},00*. Podemos prosseguir?`;
+            const night = isNightShift();
+            const message = `🟢 *COMPRA VIA WHATSAPP* \n\nOlá, quero comprar o cartão *${card.bank} ${card.type} (${card.scheme})* no valor de *R$ ${card.price},00*. Podemos prosseguir?\n\n${night ? '🤖 *Suporte automático por IA* (aguardando humano até as 07:00)' : '👤 *Atendimento humano* (07:00 às 00:00)'}`;
+            // A mensagem só é enviada se o cliente estiver ciente do modo de atendimento ativo
+            if (night) {
+                const ok = confirm('⏰ Agora está fora do horário do atendimento humano (07:00 às 00:00).\n\nNeste período o suporte é automatizado por uma IA humanizada, com resposta automática até as 07:00.\n\nEnviar a mensagem mesmo assim?');
+                if (!ok) return;
+            }
             const waLink = `https://wa.me/5511999568121?text=${encodeURIComponent(message)}`;
             window.open(waLink, '_blank');
             closeWhatsAppModal();
